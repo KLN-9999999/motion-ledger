@@ -1,0 +1,19 @@
+{
+  "description": "12-clip evaluation set specified by IMPLEMENTATION_PLAN.md. Add label JSON files and media paths as clips are recorded.",
+  "fps": 15,
+  "temporal_iou_threshold": 0.3,
+  "clips": [
+    {"id":"01-correct","scenario":"Correct run","expected_findings":[]},
+    {"id":"02-no-tightening","scenario":"No bolt tightened","expected_findings":["OMISSION:S3"]},
+    {"id":"03-hole-3-skipped","scenario":"Bolt 3 not tightened","expected_findings":["INCOMPLETE:S3@hole_3"]},
+    {"id":"04-order","scenario":"Two bolts inserted before the gasket","expected_findings":["ORDER_VIOLATION:S2"]},
+    {"id":"05-pattern","scenario":"Tightened 1-2-3-4","expected_findings":["PATTERN_VIOLATION:S3"]},
+    {"id":"06-three-bolts","scenario":"Only three bolts inserted","expected_findings":["INCOMPLETE:S2","POSTCONDITION_FAILED:P1"]},
+    {"id":"07-short-touch","scenario":"0.3 second wrench touch on bolt 2","expected_findings":["INCOMPLETE:S3@hole_2"]},
+    {"id":"08-occlusion","scenario":"Arm hides hole 4 during tightening","expected_findings":["UNVERIFIABLE:S3@hole_4"]},
+    {"id":"09-repeated-gasket","scenario":"Gasket placed, lifted and placed again","expected_findings":["REPEATED:S1"]},
+    {"id":"10-extra-hammer","scenario":"Extra hammer taps","expected_findings":["EXTRA_ACTION"]},
+    {"id":"11-lighting-angle","scenario":"Correct run, different lighting and camera angle","expected_findings":[]},
+    {"id":"12-faster-run","scenario":"Correct run, second operator, faster pace","expected_findings":[]}
+  ]
+}

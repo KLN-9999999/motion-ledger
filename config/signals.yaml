@@ -1,0 +1,24 @@
+analysis_fps: 15
+max_long_edge: 1280
+contact:
+  start_ratio: 0.02
+  stop_ratio: 0.01
+  min_duration_s: 0.3
+carried:
+  centroid_diagonal_ratio: 0.25
+placed:
+  max_speed_px_per_frame: 2.0
+  min_duration_s: 0.5
+  min_zone_ratio: 0.6
+inserted:
+  mask_area_drop_ratio: 0.30
+rotated:
+  min_total_degrees: 90
+  min_reversals: 3
+  min_duration_s: 0.3
+occlusion:
+  unverifiable_ratio: 0.30
+thresholds:
+  observed_confidence: 0.60
+  review_confidence: 0.35
+  conflict_gap: 0.50

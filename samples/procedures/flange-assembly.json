@@ -1,0 +1,33 @@
+{
+  "id": "flange-assembly",
+  "version": 3,
+  "title": "Pipe flange gasket assembly",
+  "camera": "Fixed, top-down, whole fixture and tool tray in frame",
+  "objects": [
+    {"key":"hand","concept":"hand","role":"actor","expected_count":2},
+    {"key":"gasket","concept":"orange rubber gasket","role":"part","expected_count":1},
+    {"key":"bolt","concept":"hex bolt","role":"part","expected_count":4},
+    {"key":"wrench","concept":"wrench","role":"tool","expected_count":1},
+    {"key":"flange","concept":"metal flange plate","role":"fixture","expected_count":1}
+  ],
+  "zones": [
+    {"key":"gasket_seat","label":"Gasket seat","anchor":"flange","source":"grounding"},
+    {"key":"hole_1","label":"Bolt hole 1 (top)","anchor":"flange","source":"grounding"},
+    {"key":"hole_2","label":"Bolt hole 2 (right)","anchor":"flange","source":"grounding"},
+    {"key":"hole_3","label":"Bolt hole 3 (bottom)","anchor":"flange","source":"grounding"},
+    {"key":"hole_4","label":"Bolt hole 4 (left)","anchor":"flange","source":"grounding"},
+    {"key":"tool_tray","label":"Tool tray","anchor":"","source":"manual"}
+  ],
+  "steps": [
+    {"id":"S1","title":"Place gasket on flange face","action":"place","subject":"gasket","tool":"","target_zone":"gasket_seat","repeat":null,"requires":[],"min_duration_s":0,"optional":false,"criticality":"critical","evidence_hints":{"performed":"The gasket is carried onto the flange and stays centred on it.","skipped":"The flange face is bare when the first bolt goes in."}},
+    {"id":"S2","title":"Insert bolts","action":"insert","subject":"bolt","tool":"","target_zone":"hole_*","repeat":{"count":4,"per":"zone","pattern":[]},"requires":[{"step":"S1","scope":"all"}],"min_duration_s":0,"optional":false,"criticality":"major","evidence_hints":{"performed":"A bolt is carried to each hole and stays upright in it.","skipped":"A hole is still empty at the end."}},
+    {"id":"S3","title":"Tighten bolts in cross pattern","action":"tighten","subject":"bolt","tool":"wrench","target_zone":"hole_*","repeat":{"count":4,"per":"zone","pattern":["hole_1","hole_3","hole_2","hole_4"]},"requires":[{"step":"S2","scope":"same_instance"}],"min_duration_s":1.5,"optional":false,"criticality":"critical","evidence_hints":{"performed":"The wrench engages the bolt head and turns through several strokes.","skipped":"The wrench stays in the tray, or touches the bolt without turning."}},
+    {"id":"S4","title":"Visual inspection","action":"inspect","subject":"flange","tool":"","target_zone":"","repeat":null,"requires":[{"step":"S3","scope":"all"}],"min_duration_s":0,"optional":true,"criticality":"minor","evidence_hints":{"performed":"The operator pauses over the finished flange.","skipped":""}}
+  ],
+  "postconditions": [
+    {"id":"P1","description":"Four bolts seated at the end","check":"count_in_zones","object":"bolt","zones":"hole_*","equals":4},
+    {"id":"P2","description":"Gasket on the flange at the end","check":"present_in_zone","object":"gasket","zones":"gasket_seat","equals":1}
+  ],
+  "vocabulary":["gasket","flange","bolt","wrench","torque","cross pattern"],
+  "open_questions":[]
+}

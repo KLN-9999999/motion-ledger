@@ -1,0 +1,15 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+node_modules/
+.next/
+coverage.xml
+htmlcov/
+data/**
+!data/.gitkeep
+apps/api/data/
+*.pyc
+*.tsbuildinfo
+.DS_Store
